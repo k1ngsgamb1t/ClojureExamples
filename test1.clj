@@ -1,3 +1,6 @@
+(ns example.simpleread
+    (:require [clojurelib :as lib]))
+
 (defn square [x]
     (* x x))
 
@@ -21,8 +24,10 @@
         (dorun (apply pcalls (repeat nthreads #(dotimes [_ niters] (swap)))))
         (report)))
 
-()
-(run 10 10 10 100000)
 
-(println
-     (* (square 4) (sum 5 56)))
+
+;(run 10 10 10 100000)
+
+;(println
+;     (* (square 4) (sum 5 56)))
+;(println (lib/bubble-sort [5 7 9 1 3 1 2])) ; [1 2 3]
