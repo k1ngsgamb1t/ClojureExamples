@@ -19,3 +19,6 @@
     (if (= xs ys)
       xs
       (do (println ys) (recur ys)))))
+
+ (defn generate-vector [size maxval]
+  (take size (repeatedly #(rand-int maxval))))     
