@@ -1,7 +1,8 @@
 (ns clojurelib)
 
-(defn do-something-cool [v]
-    (println v))
+(defn print-matrix [matrix]
+   (for [row matrix]
+      (do (println row) (for [col row] (println col)))))
   
 (defn str2int [txt]
   (if (number? (read-string txt)) txt 100))
@@ -21,4 +22,8 @@
       (do (println ys) (recur ys)))))
 
  (defn generate-vector [size maxval]
-  (take size (repeatedly #(rand-int maxval))))     
+  (repeatedly size #(rand-int maxval)))    
+
+(defn generate-matrix [nrows ncols maxval]
+  (repeatedly nrows (fn [] (generate-vector ncols maxval))))
+ 

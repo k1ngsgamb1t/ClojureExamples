@@ -19,27 +19,10 @@
         (dorun (apply pcalls (repeat nthreads #(dotimes [_ niters] (swap)))))
         (report)))
 )
-
-(defn run_mult_sort [nvecs nsize nthreads]
-    (let [vec-refs (->> (range (* nvecs nsize)) (partition nsize) (map (comp ref vec)) vec)
-            swap #(let [v1 (rand-int nvecs)
-                        v2 (rand-int nvecs)
-                        i1 (rand-int nsize)
-                        i2 (rand-int nsize)]
-                    (dosync
-                    (let [tmp (nth @(vec-refs v1) i1)]
-                        (alter (vec-refs v1) assoc i1 (nth @(vec-refs v2) i2))
-                        (alter (vec-refs v2) assoc i2 tmp))))
-            report #(let [derefed (map deref vec-refs)]
-                    (prn derefed)
-                    (println "Distinct:" (->> derefed (apply concat) distinct count)))]
-        (report)
-        (dorun (apply pcalls (repeat nthreads #(lib/bubble-sort vec))))
-        (report)))
 ;(run 10 10 10 100000)
-;run_mult_sort(1 10 2)
-(map println (lib/bubble-sort  (lib/generate-vector 10 10)))
+;(lib/print-matrix (lib/generate-matrix 5 5 3))
 
-;(println
-;     (* (square 4) (sum 5 56)))
-;(println (lib/bubble-sort [5 7 9 1 3 1 2])) ; [1 2 3]
+(let [size 10 maxval 10]
+(map println
+     (lib/bubble-sort  (lib/generate-vector size maxval)))
+)
