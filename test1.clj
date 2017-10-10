@@ -1,12 +1,7 @@
 (ns example.simpleread
     (:require [clojurelib :as lib]))
 
-(defn square [x]
-    (* x x))
-
-(defn sum [x y]
-    *(+ x x) y)
-
+(comment
 (defn run [nvecs nitems nthreads niters]
     (let [vec-refs (->> (range (* nvecs nitems)) (partition nitems) (map (comp ref vec)) vec)
             swap #(let [v1 (rand-int nvecs)
@@ -23,14 +18,14 @@
         (report)
         (dorun (apply pcalls (repeat nthreads #(dotimes [_ niters] (swap)))))
         (report)))
-
+)
 
 (defn run_mult_sort [nvecs nsize nthreads]
-    (let [vec-refs (->> (range (* nvecs nitems)) (partition nitems) (map (comp ref vec)) vec)
+    (let [vec-refs (->> (range (* nvecs nsize)) (partition nsize) (map (comp ref vec)) vec)
             swap #(let [v1 (rand-int nvecs)
                         v2 (rand-int nvecs)
-                        i1 (rand-int nitems)
-                        i2 (rand-int nitems)]
+                        i1 (rand-int nsize)
+                        i2 (rand-int nsize)]
                     (dosync
                     (let [tmp (nth @(vec-refs v1) i1)]
                         (alter (vec-refs v1) assoc i1 (nth @(vec-refs v2) i2))
@@ -39,10 +34,11 @@
                     (prn derefed)
                     (println "Distinct:" (->> derefed (apply concat) distinct count)))]
         (report)
-        (dorun (apply pcalls (repeat nthreads #(lib/bubble-sort vect))))
+        (dorun (apply pcalls (repeat nthreads #(lib/bubble-sort vec))))
         (report)))
 ;(run 10 10 10 100000)
-run_mult_sort(1 10 2)
+;run_mult_sort(1 10 2)
+(map println (lib/bubble-sort  (lib/generate-vector 10 10)))
 
 ;(println
 ;     (* (square 4) (sum 5 56)))
