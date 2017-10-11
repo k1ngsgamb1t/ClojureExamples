@@ -20,9 +20,17 @@
         (report)))
 )
 ;(run 10 10 10 100000)
-;(lib/print-matrix (lib/generate-matrix 5 5 3))
+(println (lib/fib 100))
 
-(let [size 10 maxval 10]
-(map println
-     (lib/bubble-sort  (lib/generate-vector size maxval)))
-)
+;(let [matrix1 (lib/generate-matrix 2 2 10)
+;      matrix2 (lib/generate-matrix 2 2 10)]
+;    (do (lib/print-matrix matrix1)
+;       (newline)
+;       (lib/print-matrix matrix2)
+;       (newline)       
+;       (println (lib/add-matrix matrix1 matrix2))))
+
+;(let [size 10 maxval 10]
+;(map println
+;     (lib/bubble-sort  (lib/generate-vector size maxval)))
+;)
