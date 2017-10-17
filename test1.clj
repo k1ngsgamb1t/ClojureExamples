@@ -34,3 +34,9 @@
 ;(map println
 ;     (lib/bubble-sort  (lib/generate-vector size maxval)))
 ;)
+
+;(println (lib/f 3))               ; ⇒ "Argument is a long"
+;(println (lib/f 3.4))             ; ⇒ "Argument is a double"
+;(println (lib/f "string"))        ; ⇒ "Argument is not a number"
+
+(println ())

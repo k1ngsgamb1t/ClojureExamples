@@ -37,5 +37,6 @@
   (into [] (repeatedly size #(rand-int maxval))))    
 
 (defn generate-matrix [nrows ncols maxval]
-  (repeatedly nrows (fn [] (generate-vector ncols maxval))))
- 
+  (repeatedly nrows (fn [] (generate-vector ncols maxval)))) 
+
+
